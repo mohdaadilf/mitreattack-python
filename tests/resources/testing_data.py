@@ -7799,7 +7799,7 @@ index = {
     "description": "MITRE ATT&CK is a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations. The ATT&CK knowledge base is used as a foundation for the development of specific threat models and methodologies in the private sector, in government, and in the cybersecurity product and service community.",
     "created": "2018-01-17T12:56:55.080000+00:00",
     "modified": "2021-04-29T14:49:39.188000+00:00",
-    "collections": [
+    "attack_collections": [
         {
             "id": "x-mitre-collection--23320f4-22ad-8467-3b73-ed0c869a12838",
             "created": "2018-01-17T12:56:55.080Z",

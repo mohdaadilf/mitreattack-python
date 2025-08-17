@@ -56,7 +56,7 @@ output_indexA = CollectionToIndex.generate_index(name='example', description='ex
                                                  folders=None, sets=None)
 output_indexB = CollectionToIndex.generate_index(name='example2', description='demonstration index',
                                                  root_url='www.example.com',
-                                                 files=None, folders=['/path/to/folder/with/collections'], sets=None)
+                                                 files=None, folders=['/path/to/folder/with/attack_collections'], sets=None)
 with open('path/to/bundle/bundleC.json', 'r') as f:
     data = json.load(f)
 output_indexC = CollectionToIndex.generate_index(name='example3', description='exhibit index',

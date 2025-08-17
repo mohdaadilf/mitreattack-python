@@ -25,13 +25,13 @@ class CollectionToIndex:
             description (string):
                 the description of the index
             root_url (string):
-                the root URL where the collections can be found. Specified collection paths will be
+                the root URL where the attack_collections can be found. Specified collection paths will be
                 appended to this for the collection URL
             files (string[], optional):
                 collection JSON files to include in the index. Cannot be used with folder argument
             folders (string[], optional):
                 folders of collection JSON files to include in the index. Cannot be used with
-                files argument. Will only match collections that end with a version number
+                files argument. Will only match attack_collections that end with a version number
             sets (meta[], optional):
                 array of json dictionaries representing stix bundle objects or and array of
                 MemoryStore objects to include in the index
@@ -84,7 +84,7 @@ class CollectionToIndex:
         collections = {}  # STIX ID -> collection object
 
         if files:
-            for collection_bundle_file in tqdm(files, desc="parsing collections"):
+            for collection_bundle_file in tqdm(files, desc="parsing attack_collections"):
                 with open(collection_bundle_file, "r", encoding="utf-16") as f:
                     bundle = json.load(f)
                     url = (
@@ -127,17 +127,17 @@ class CollectionToIndex:
             "description": description,
             "created": index_created.isoformat(),
             "modified": index_modified.isoformat(),
-            "collections": list(collections.values()),
+            "attack_collections": list(collections.values()),
         }
 
     @staticmethod
     def _extract_collection(bundle, collections, url):
-        """Extract a collection from a bundle, and build it into the passed in collections dictionary.
+        """Extract a collection from a bundle, and build it into the passed in attack_collections dictionary.
 
         :param bundle: The bundle to work with
         :param collections: A dictionary to place the extracted collection into
         :param url: The corresponding url for this given collection version
-        :return: Nothing (Meta - collections dictionary modified)
+        :return: Nothing (Meta - attack_collections dictionary modified)
         """
         for collection_version in filter(lambda x: x["type"] == "x-mitre-collection", bundle["objects"]):
             # parse collection
@@ -175,7 +175,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Create a collection index from a set of collections")
+    parser = argparse.ArgumentParser(description="Create a collection index from a set of attack_collections")
     parser.add_argument(
         "name", type=str, default=None, help="name of the collection index. If omitted a placeholder will be used"
     )
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "root_url",
         type=str,
-        help="the root URL where the collections can be found. Specified collection paths will be appended to this for "
+        help="the root URL where the attack_collections can be found. Specified collection paths will be appended to this for "
         "the collection URL",
     )
     parser.add_argument(
@@ -201,10 +201,10 @@ if __name__ == "__main__":
         nargs="+",
         default=None,
         metavar=("collection1", "collection2"),
-        help="list of collections to include in the index",
+        help="list of attack_collections to include in the index",
     )
     input_options.add_argument(
-        "--folders", type=str, nargs="+", default=None, help="folder of JSON files to treat as collections"
+        "--folders", type=str, nargs="+", default=None, help="folder of JSON files to treat as attack_collections"
     )
 
     argv = parser.parse_args()
